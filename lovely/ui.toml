@@ -477,9 +477,7 @@ position = "before"
 payload = '''
     for k, v in pairs(SMODS.ObjectTypes) do
         if card.config.center.pools and card.config.center.pools[v.key] and v.pool_badge then
-            if not badges[v.pool_badge] then
-                badges[#badges+1] = v.pool_badge()
-            end
+            badges[#badges+1] = v.pool_badge()
         end
     end
 '''
