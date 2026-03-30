@@ -465,3 +465,22 @@ if not v.no_ui then
   game_rules[#game_rules+1] = {n=G.UIT.R, config={align = "cl"}, nodes= localize{type = 'text', key = 'ch_c_'..v.id, vars = {v.value}}}
 end
 '''
+
+# Pool badges 
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+    if AUT.info then
+'''
+position = "before"
+payload = '''
+    for k, v in pairs(SMODS.ObjectTypes) do
+        if card.config.center.pools and card.config.center.pools[v.key] and v.pool_badge then
+            if not badges[v.pool_badge] then
+                badges[#badges+1] = v.pool_badge()
+            end
+        end
+    end
+'''
+match_indent = true
